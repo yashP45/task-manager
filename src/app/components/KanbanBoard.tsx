@@ -34,7 +34,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ stage }) => {
   };
 
   return (
-    <div className="w-1/3 p-4">
+    <div className="sm:w-1/3 p-4 w-full">
       <h2 className="text-lg font-bold mb-2">{stage.replace('_', ' ')}</h2>
       <StrictModeDroppable droppableId={stage} key={stage}>
         {(provided, snapshot) => (
