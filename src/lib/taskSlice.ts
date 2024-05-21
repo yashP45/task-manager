@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+const ISSERVER = typeof window === "undefined";
 
 interface Task {
   id: number;
@@ -11,12 +12,17 @@ interface TasksState {
 }
 
 const loadTasks = () => {
-  const storedTasks = localStorage.getItem('tasks');
+  if (typeof window === "undefined") {
+    return []; 
+  }
+  const storedTasks = window.localStorage.getItem('tasks');
   return storedTasks ? JSON.parse(storedTasks) : [];
 };
 
 const saveTasks = (tasks: Task[]) => {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  if (typeof window !== "undefined") { 
+    window.localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
 };
 
 const initialState: TasksState = {
